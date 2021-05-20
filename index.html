@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Black Jack</title>
+        <title>Blackjack</title>
         <link rel="stylesheet" href="style.css">
 
     </head>
     <body>
-        <h1>Hello</h1>
+        <h1>Blackjack</h1>
+        <p id="message-p"></p>
+        <div class="player-area">
+            <p id="player-cards"></p>
+            <p id="player-sum"></p>
+        </div>
+        <div class="cpu-area">
+            <p id="cpu-cards"></p>
+            <p id="cpu-sum"></p>
+        </div>
+        <button onclick="startGame()">start game</button>
+        <button onclick="newPlayerCard()">new card</button>
+        <p id="player-score"></p>
+        <p id="cpu-score"></p>
     </body>
     <script src="index.js"></script>
 </html>

@@ -1,3 +1,36 @@
+body {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", Arial, sans-serif;
+    background-color: rgb(38, 138, 38);
+    text-align: center;
+}
+
 h1 {
-    color: brown;
+    color: rgb(214, 161, 26);
+}
+
+p {
+    font-weight: 700;
+    color: white;
+}
+
+#message-p {
+    font-style: italic;
+}
+
+button {
+    color:rgb(38, 138, 38);
+    background-color:rgb(214, 161, 26);
+    width: 150px;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin: 3px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.98);
 }
