@@ -3,7 +3,9 @@ let player = {
     total: 0,
     isAlive: false,
     hasBlackJack: false,
-    cards: []
+    cards: [],
+    score: 0,
+    hasAce: false
 }
 
 let cpu = {
@@ -11,7 +13,9 @@ let cpu = {
     total: 0,
     isAlive: false,
     hasBlackJack: false,
-    cards: []
+    cards: [],
+    score: 0,
+    hasAce: false
 }
 
 let deckOfCards = [
@@ -30,17 +34,17 @@ let cpuSumEl = document.getElementById("cpu-sum")
 let playerCardsEl = document.getElementById("player-cards")
 let cpuCardsEl = document.getElementById("cpu-cards")
 
-let playerScore = 0
-let cpuScore = 0
 let playerScoreEl = document.getElementById("player-score")
 let cpuScoreEl = document.getElementById("cpu-score")
 
 // BUTTONS
 const startBtn = document.getElementById("start-game")
+const newCardBtn = document.getElementById("new-card")
+const stayBtn = document.getElementById("stay")
 
-// add below code to code at end of hand
-// playerScoreEl.textContent = player.name + ": " + playerScore 
-// cpuScoreEl.textContent = cpu.name + ": " + cpuScore 
+// add below code to code at end of deal
+playerScoreEl.textContent = player.name + ": " + player.score 
+cpuScoreEl.textContent = cpu.name + ": " + cpu.score 
 
 function getRandomCard() {
     // declare randomNumber variable that returns a random number between 1 and deckofCards.length
@@ -68,6 +72,9 @@ function startGame() {
     startBtn.style.display = "none"
     // dealCards()
     dealCards()
+    //activate "new card" and "stay buttons"
+    newCardBtn.style.display = "inline-block"
+    stayBtn.style.display = "inline-block"
 }
 
 function dealCards() {
@@ -80,20 +87,68 @@ function dealCards() {
     // set playerCards equal to [firstCard, secondCard] - same for CPU
     player.cards = [playerFirstCard, playerSecondCard]
     cpu.cards = [cpuFirstCard, cpuSecondCard]
-    console.log(player.cards)
-    console.log(cpu.cards)
     // display cards and sum of cards
     playerCardsEl.innerText = player.cards[0] + " " + player.cards[1]
-    cpuCardsEl.innerText = cpu.cards[0] + " " + player.cards[1]
+    cpuCardsEl.innerText = cpu.cards[0] + " " + "[?]"
+    // run getScore()
+    getScore()
 }
 
 function newCard() {
+    //if player has busted, move on
+    if (player.score >= 21) { 
+        computerTurn() 
+    }
     // run getRandomCard
-    // run computerTurn()
+    let newCard = getRandomCard()
+    //display new card
+    playerCardsEl.innerText += " " + newCard
+    //add new card to player cards
+    player.cards.push(newCard)
+    // run getScore()
+    getScore()
+}
+
+function getScore() {
+    let playerScore = 0
+    for (let i=0; i < player.cards.length; i++) {
+        let cardValue
+        //determine numeric value based on player.cards[i] value
+        isNaN(player.cards[i].charAt(0)) ? cardValue = 10 
+        : player.cards[i].charAt(0) == "A" ? cardValue = 11
+        : cardValue = parseFloat(player.cards[i])
+        //set playerScore to += value
+        playerScore += cardValue
+        console.log(cardValue)
+    }
+    
+    // check if player has ace
+    player.hasAce ? player.score = playerScore + " or " + playerScore - 11 
+    : player.score = playerScore
+    console.log(player.score)
+    //display score
+    playerScoreEl.textContent = player.name + ": " + player.score 
+    //set cpu score equal to first card value + ? hidden card
+}
+
+function getComputerScore() {
+    let cpuScore
+    for(let i=0; i < cpu.cards.length; i++) {
+        //determine numberic value based on cpu.cards[i] value
+        //set cpuScore to += value
+    }
 }
 
 function stay() {
     // run computerTurn()
+}
+
+function computerTurn() {
+    // reveal hidden card
+    // getComputerScore()
+    // get new card if < 17
+    // stay if >= 17
+    // run displayResults()
 }
 
 function doubleDown() {
@@ -105,12 +160,6 @@ function splitCards() {
     //add second hand...set hasSplitCards to true?
     //do something with scoring
     //run get new card
-}
-
-function computerTurn() {
-    // get new card if < 17
-    // stay if >= 17
-    // run displayResults()
 }
 
 function displayResults() {

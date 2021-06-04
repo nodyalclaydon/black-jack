@@ -17,6 +17,11 @@ p {
     font-style: italic;
 }
 
+#new-card,
+#stay {
+    display: none;
+}
+
 button {
     color:rgb(38, 138, 38);
     background-color:rgb(214, 161, 26);
