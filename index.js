@@ -1,3 +1,9 @@
+import Deck from "./deck.js"
+
+const deck = new Deck()
+deck.shuffle()
+console.log(deck)
+
 let player = {
     name: "Clay",
     total: 0,
